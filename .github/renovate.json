@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:js-lib",
+    ":semanticPrefixChore",
+    ":prHourlyLimitNone",
+    ":prConcurrentLimitNone",
+    ":enableVulnerabilityAlerts",
+    ":dependencyDashboard",
+    "schedule:weekends"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "!think-model-postgresql",
+        "!vuepress",
+        "!@vuepress/{/,}**",
+        "!vuepress-{/,}**",
+        "*"
+      ]
+    },
+    {
+      "matchPackageNames": ["node"],
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "matchPackageNames": ["vite"],
+      "matchUpdateTypes": ["patch"]
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "commitMessageAction": "update lockfile",
+    "platformAutomerge": true,
+    "extends": ["group:allNonMajor", "schedule:weekly"],
+    "packageRules": [
+      {
+        "matchPackageNames": ["!vuepress", "!@vuepress/{/,}**", "!vuepress-{/,}**", "*"]
+      }
+    ]
+  }
+}
